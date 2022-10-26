@@ -10,18 +10,13 @@ interface PostInfo {
 }
 
 interface NewsState {
-  latestNews: number[];
-  postInfo: PostInfo;
+  latestNewsID: number[];
+  newsDetails: PostInfo[];
 }
 
 const initialState: NewsState = {
-  latestNews: [],
-  postInfo: {
-    title: "",
-    score: 0,
-    by: "",
-    time: 0,
-  },
+  latestNewsID: [],
+  newsDetails: [],
 };
 
 export const newsSlice = createSlice({
@@ -29,13 +24,18 @@ export const newsSlice = createSlice({
   initialState,
   reducers: {
     getLatestNews: (state, action) => {
-      state.latestNews = action.payload.slice(0, 100);
+      state.latestNewsID = action.payload.slice(0, 10);
+    },
+    getDetailedNewsInfo: (state, action) => {
+      state.newsDetails.push(action.payload);
     },
   },
 });
 
-export const { getLatestNews } = newsSlice.actions;
+export const { getLatestNews, getDetailedNewsInfo } = newsSlice.actions;
 
-export const selectLatestNews = (state: RootState) => state.news.latestNews;
+export const selectLatestNews = (state: RootState) => state.news.latestNewsID;
+export const selectDetailedNewsInfo = (state: RootState) =>
+  state.news.newsDetails;
 
 export default newsSlice.reducer;
