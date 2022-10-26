@@ -1,10 +1,14 @@
-import React from 'react';
-import {Homepage} from "./pages/Homepage";
+import React from "react";
+import { Homepage } from "./pages/Homepage/Homepage";
+import { WrapperStyled } from "./styles/general.styled";
+import { Navbar } from "./components/Navbar/Navbar";
 
 function App() {
   return (
-
-      <Homepage/>
+    <WrapperStyled>
+      <Navbar />
+      <Homepage />
+    </WrapperStyled>
   );
 }
 
