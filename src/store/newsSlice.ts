@@ -7,6 +7,7 @@ interface PostInfo {
   score: number;
   by: string;
   time: number;
+  id: number;
 }
 
 interface NewsState {

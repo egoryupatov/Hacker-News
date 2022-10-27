@@ -11,6 +11,7 @@ export const NewsContainerStyled = styled.div`
 
 export const NewsTitleStyled = styled.div`
   display: flex;
+  gap: 2px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   padding-bottom: 5px;
 `;

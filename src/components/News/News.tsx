@@ -7,6 +7,7 @@ import {
   NewsTitleStyled,
   NewsContainerStyled,
 } from "./News.styled";
+import { Link } from "react-router-dom";
 
 export const News = () => {
   useGetDetailedNewsInfo();
@@ -14,17 +15,20 @@ export const News = () => {
 
   return (
     <>
-      {detailedNewsInfo.map((e, i) => (
+      {detailedNewsInfo.map((news, i) => (
         <NewsContainerStyled>
-          <NewsTitleStyled>{i + 1 + ". " + e.title}</NewsTitleStyled>
+          <NewsTitleStyled>
+            {i + 1 + "."}
+            <Link to={`/news/${news.id}`}>{news.title}</Link>
+          </NewsTitleStyled>
           <NewsInfoStyled>
-            <p>{e.score} points</p>
-            <p>by {e.by}</p>
+            <p>{news.score} points</p>
+            <p>by {news.by}</p>
             <p>
-              {new Date(e.time * 1000).getMinutes() > 60
-                ? Math.floor(new Date(e.time * 1000).getMinutes() / 60) +
+              {new Date(news.time * 1000).getMinutes() > 60
+                ? Math.floor(new Date(news.time * 1000).getMinutes() / 60) +
                   " hours ago"
-                : new Date(e.time * 1000).getMinutes() + " minutes ago"}
+                : new Date(news.time * 1000).getMinutes() + " minutes ago"}
             </p>
           </NewsInfoStyled>
         </NewsContainerStyled>
