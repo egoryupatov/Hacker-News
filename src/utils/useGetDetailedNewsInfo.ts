@@ -1,10 +1,6 @@
 import { useDispatch } from "react-redux";
 import { useAppSelector } from "../store/hooks";
-import {
-  getDetailedNewsInfo,
-  getLatestNews,
-  selectLatestNews,
-} from "../store/newsSlice";
+import { getDetailedNewsInfo, selectLatestNews } from "../store/newsSlice";
 import { useEffect } from "react";
 
 export const useGetDetailedNewsInfo = () => {
@@ -14,14 +10,14 @@ export const useGetDetailedNewsInfo = () => {
   useEffect(() => {
     fetch("https://hacker-news.firebaseio.com/v0/newstories.json?print=pretty")
       .then((response) => response.json())
-      .then((response) => dispatch(getLatestNews(response)));
-
-    newsID.forEach((id: number) => {
-      fetch(
-        `https://hacker-news.firebaseio.com/v0/item/${id}.json?print=pretty`
-      )
-        .then((response) => response.json())
-        .then((response) => dispatch(getDetailedNewsInfo(response)));
-    });
+      .then((response) => {
+        response.slice(0, 10).forEach((id: number) => {
+          fetch(
+            `https://hacker-news.firebaseio.com/v0/item/${id}.json?print=pretty`
+          )
+            .then((response) => response.json())
+            .then((response) => dispatch(getDetailedNewsInfo(response)));
+        });
+      });
   }, []);
 };

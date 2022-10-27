@@ -4,10 +4,12 @@ import {
   NavbarButton,
   NavBarButtonsContainerStyled,
 } from "./Navbar.styled";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 export const Navbar = () => {
-  const handleRefreshClick = () => {};
+  const location = useLocation();
+  const handleRefreshNewsClick = () => {};
+  const handleRefreshCommentsClick = () => {};
 
   return (
     <NavbarStyled>
@@ -16,7 +18,16 @@ export const Navbar = () => {
         <Link to={"/"}>
           <NavbarButton>Go Home</NavbarButton>
         </Link>
-        <NavbarButton onClick={handleRefreshClick}>Refresh news</NavbarButton>
+
+        {location.pathname.includes("news") ? (
+          <NavbarButton onClick={handleRefreshCommentsClick}>
+            Refresh comments
+          </NavbarButton>
+        ) : (
+          <NavbarButton onClick={handleRefreshNewsClick}>
+            Refresh news
+          </NavbarButton>
+        )}
       </NavBarButtonsContainerStyled>
     </NavbarStyled>
   );

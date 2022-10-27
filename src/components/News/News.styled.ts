@@ -22,4 +22,12 @@ export const NewsInfoStyled = styled.div`
   gap: 5px;
   color: #808080;
   font-size: 12px;
+
+  a {
+    color: #808080;
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }
 `;

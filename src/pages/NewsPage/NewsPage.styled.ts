@@ -7,12 +7,31 @@ import {
 
 export const NewsPageContainerStyled = styled(NewsContainerStyled)``;
 
-export const NewsPageCommentsContainerStyled = styled.div`
+export const NewsPageCommentSectionStyled = styled.div`
   display: flex;
   flex-direction: column;
   padding: 20px;
   gap: 15px;
   margin-bottom: 15px;
+`;
+
+export const NewsPageParentCommentContainerStyled = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  gap: 15px;
+  margin-bottom: 15px;
+  background: #f6f6ef;
+`;
+
+export const NewsPageChildCommentContainerStyled = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  gap: 15px;
+  margin-bottom: 15px;
+  background: #f6f6ef;
+  margin-left: 40px;
 `;
 
 export const NewsPageTitleStyled = styled(NewsTitleStyled)`
@@ -22,8 +41,11 @@ export const NewsPageTitleStyled = styled(NewsTitleStyled)`
 `;
 
 export const NewsPageTitleURLStyled = styled.div`
-  color: #808080;
   font-size: 12px;
+
+  a {
+    color: #808080;
+  }
 `;
 
 export const NewsPageCommentTitleStyled = styled.div`

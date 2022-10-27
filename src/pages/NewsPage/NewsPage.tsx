@@ -5,7 +5,8 @@ import {
   NewsPageInfoStyled,
   NewsPageTitleStyled,
   NewsPageTitleURLStyled,
-  NewsPageCommentsContainerStyled,
+  NewsPageCommentSectionStyled,
+  NewsPageChildCommentContainerStyled,
   NewsPageCommentTitleStyled,
   NewsPageCommentBodyStyled,
 } from "./NewsPage.styled";
@@ -55,26 +56,31 @@ export const NewsPage = () => {
         </NewsPageInfoStyled>
       </NewsPageContainerStyled>
 
-      <NewsPageCommentsContainerStyled>
-        {selectCurrentParentComments.map((comment) => (
-          <NewsContainerStyled>
-            <NewsPageCommentTitleStyled>
-              <p>{comment.by}</p>
-              <p>
-                {new Date(comment.time * 1000).getMinutes() > 60
-                  ? Math.floor(
-                      new Date(comment.time * 1000).getMinutes() / 60
-                    ) + " hours ago"
-                  : new Date(comment.time * 1000).getMinutes() + " minutes ago"}
-              </p>
-            </NewsPageCommentTitleStyled>
+      <NewsPageCommentSectionStyled>
+        {selectCurrentParentComments.map((comment) =>
+          !comment.text ? (
+            ""
+          ) : (
+            <NewsPageChildCommentContainerStyled>
+              <NewsPageCommentTitleStyled>
+                <p>{comment.by}</p>
+                <p>
+                  {new Date(comment.time * 1000).getMinutes() > 60
+                    ? Math.floor(
+                        new Date(comment.time * 1000).getMinutes() / 60
+                      ) + " hours ago"
+                    : new Date(comment.time * 1000).getMinutes() +
+                      " minutes ago"}
+                </p>
+              </NewsPageCommentTitleStyled>
 
-            <NewsPageCommentBodyStyled>
-              {!comment.dead ? comment.text : ""}
-            </NewsPageCommentBodyStyled>
-          </NewsContainerStyled>
-        ))}
-      </NewsPageCommentsContainerStyled>
+              <NewsPageCommentBodyStyled>
+                {comment.text}
+              </NewsPageCommentBodyStyled>
+            </NewsPageChildCommentContainerStyled>
+          )
+        )}
+      </NewsPageCommentSectionStyled>
     </>
   );
 };

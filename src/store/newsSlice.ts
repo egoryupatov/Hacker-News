@@ -8,7 +8,6 @@ export interface CurrentNewsParentComments {
   text: string;
   time: number;
   type: string;
-  dead: boolean;
 }
 
 interface Kids {
@@ -62,7 +61,7 @@ export const newsSlice = createSlice({
   initialState,
   reducers: {
     getLatestNews: (state, action) => {
-      state.latestNewsID = action.payload.slice(0, 10);
+      state.latestNewsID = action.payload;
     },
     getDetailedNewsInfo: (state, action) => {
       state.newsDetails.push(action.payload);

@@ -24,14 +24,15 @@ export const News = () => {
           <NewsInfoStyled>
             <p>{news.score} points</p>
             <p>by {news.by}</p>
-            qq
             <p>
               {new Date(news.time * 1000).getMinutes() > 60
                 ? Math.floor(new Date(news.time * 1000).getMinutes() / 60) +
                   " hours ago"
                 : new Date(news.time * 1000).getMinutes() + " minutes ago"}
             </p>
-            <p>| {news.descendants} comments</p>
+            <p>
+              | <Link to={`/news/${news.id}`}>{news.descendants} comments</Link>
+            </p>
           </NewsInfoStyled>
         </NewsContainerStyled>
       ))}
