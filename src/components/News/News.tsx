@@ -11,6 +11,7 @@ import { Link } from "react-router-dom";
 
 export const News = () => {
   useGetDetailedNewsInfo();
+
   const detailedNewsInfo = useAppSelector(selectDetailedNewsInfo);
 
   return (
