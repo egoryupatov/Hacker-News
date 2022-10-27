@@ -9,6 +9,11 @@ export const NavbarStyled = styled.nav`
   padding: 10px 20px 10px 20px;
 `;
 
+export const NavBarButtonsContainerStyled = styled.div`
+  display: flex;
+  gap: 10px;
+`;
+
 export const NavbarButton = styled.button`
   background-color: #ffffff;
   border: 1px solid rgba(0, 0, 0, 0.1);

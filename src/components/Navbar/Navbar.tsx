@@ -1,6 +1,10 @@
 import React, { useEffect } from "react";
-import { NavbarStyled } from "./Navbar.styled";
-import { NavbarButton } from "./Navbar.styled";
+import {
+  NavbarStyled,
+  NavbarButton,
+  NavBarButtonsContainerStyled,
+} from "./Navbar.styled";
+import { Link } from "react-router-dom";
 
 export const Navbar = () => {
   const handleRefreshClick = () => {};
@@ -8,7 +12,12 @@ export const Navbar = () => {
   return (
     <NavbarStyled>
       <div>Hacker News</div>
-      <NavbarButton onClick={handleRefreshClick}>Refresh news</NavbarButton>
+      <NavBarButtonsContainerStyled>
+        <Link to={"/"}>
+          <NavbarButton>Go Home</NavbarButton>
+        </Link>
+        <NavbarButton onClick={handleRefreshClick}>Refresh news</NavbarButton>
+      </NavBarButtonsContainerStyled>
     </NavbarStyled>
   );
 };
