@@ -1,9 +1,6 @@
 import React, { useEffect } from "react";
-import {
-  NavbarStyled,
-  NavbarButton,
-  NavBarButtonsContainerStyled,
-} from "./Navbar.styled";
+import { NavbarStyled, NavBarButtonsContainerStyled } from "./Navbar.styled";
+import { ButtonStyled } from "../../styles/general.styled";
 import { Link, useLocation } from "react-router-dom";
 
 export const Navbar = () => {
@@ -16,17 +13,17 @@ export const Navbar = () => {
       <div>Hacker News</div>
       <NavBarButtonsContainerStyled>
         <Link to={"/"}>
-          <NavbarButton>Go Home</NavbarButton>
+          <ButtonStyled>Go Home</ButtonStyled>
         </Link>
 
         {location.pathname.includes("news") ? (
-          <NavbarButton onClick={handleRefreshCommentsClick}>
+          <ButtonStyled onClick={handleRefreshCommentsClick}>
             Refresh comments
-          </NavbarButton>
+          </ButtonStyled>
         ) : (
-          <NavbarButton onClick={handleRefreshNewsClick}>
+          <ButtonStyled onClick={handleRefreshNewsClick}>
             Refresh news
-          </NavbarButton>
+          </ButtonStyled>
         )}
       </NavBarButtonsContainerStyled>
     </NavbarStyled>

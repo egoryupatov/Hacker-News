@@ -50,17 +50,34 @@ export const NewsPageTitleURLStyled = styled.div`
   }
 `;
 
-export const NewsPageCommentTitleStyled = styled.div`
+export const CommentTitleStyled = styled.div`
   display: flex;
+  align-items: center;
   gap: 5px;
   color: #808080;
-  font-size: 12px;
+  font-size: 13px;
+
+  span {
+    text-decoration: underline;
+    cursor: pointer;
+  }
 `;
 
-export const NewsPageCommentBodyStyled = styled.div`
+export const CommentBodyStyled = styled.div`
   display: flex;
   font-size: 14px;
   color: #3c4043;
 `;
 
-export const NewsPageInfoStyled = styled(NewsInfoStyled)``;
+export const ChildCommentStyled = styled.div`
+  display: flex;
+  flex-direction: column;
+  font-size: 14px;
+  color: #3c4043;
+  margin-left: 40px;
+  gap: 15px;
+`;
+
+export const NewsPageInfoStyled = styled(NewsInfoStyled)`
+  font-size: 13px;
+`;

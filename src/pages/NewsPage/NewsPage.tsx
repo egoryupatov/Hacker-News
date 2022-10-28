@@ -6,9 +6,8 @@ import {
   NewsPageTitleStyled,
   NewsPageTitleURLStyled,
   NewsPageCommentSectionStyled,
-  NewsPageChildCommentContainerStyled,
-  NewsPageCommentTitleStyled,
-  NewsPageCommentBodyStyled,
+  CommentTitleStyled,
+  CommentBodyStyled,
   NewsPageParentCommentContainerStyled,
 } from "./NewsPage.styled";
 import { useGetSpecificNewsInfo } from "../../utils/useGetSpecificNewsInfo";
@@ -16,6 +15,7 @@ import { useAppSelector } from "../../store/hooks";
 import { selectCurrentNewsInfo } from "../../store/newsSlice";
 import { selectCurrentNewsCommentsArray } from "../../store/newsSlice";
 import { useGetComment } from "../../utils/useGetComment";
+import { ChildCommentStyled } from "./NewsPage.styled";
 
 const newsID = 8863;
 
@@ -78,7 +78,7 @@ export const NewsPage = () => {
             ""
           ) : (
             <NewsPageParentCommentContainerStyled>
-              <NewsPageCommentTitleStyled>
+              <CommentTitleStyled>
                 <p>{comment.by}</p>
                 <p>
                   {new Date(comment.time * 1000).getMinutes() > 60
@@ -91,26 +91,41 @@ export const NewsPage = () => {
 
                 {comment.kids && comment.kids.length > 0 && (
                   <p>
-                    | this comment has {comment.kids.length} child comments.{" "}
-                    <button onClick={() => handleClickOnComment(comment.kids)}>
-                      Click to see them
-                    </button>
+                    | this comment has{" "}
+                    <span onClick={() => handleClickOnComment(comment.kids)}>
+                      {comment.kids.length} child comment
+                      {comment.kids.length > 1 ? "s" : ""} ▼
+                    </span>
                   </p>
                 )}
-              </NewsPageCommentTitleStyled>
+              </CommentTitleStyled>
 
-              <NewsPageCommentBodyStyled>
-                {comment.text}
-                <div>
-                  {selectCurrentParentComments
-                    .filter((comment2) => {
-                      return comment2.parent === comment.id;
-                    })
-                    .map((comment2) => (
-                      <div>{comment2.by}</div>
-                    ))}
-                </div>
-              </NewsPageCommentBodyStyled>
+              <CommentBodyStyled>{comment.text}</CommentBodyStyled>
+
+              <ChildCommentStyled>
+                {selectCurrentParentComments
+                  .filter((comment2) => {
+                    return comment2.parent === comment.id;
+                  })
+                  .map((comment2) => (
+                    <>
+                      <CommentTitleStyled>
+                        <p>▲ {comment2.by}</p>
+                        <p>
+                          {new Date(comment2.time * 1000).getMinutes() > 60
+                            ? Math.floor(
+                                new Date(comment2.time * 1000).getMinutes() / 60
+                              ) + " hours ago"
+                            : new Date(comment2.time * 1000).getMinutes() +
+                              " minutes ago"}
+                        </p>
+                      </CommentTitleStyled>
+                      <CommentBodyStyled>
+                        <p>{comment2.text}</p>
+                      </CommentBodyStyled>
+                    </>
+                  ))}
+              </ChildCommentStyled>
             </NewsPageParentCommentContainerStyled>
           )
         )}
