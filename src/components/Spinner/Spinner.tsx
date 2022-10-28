@@ -4,13 +4,20 @@ import {
   SpinnerContainerStyled,
   SpinnerWrapperStyled,
 } from "./Spinner.styled";
+import { useLocation } from "react-router-dom";
 
 export const Spinner = () => {
+  const location = useLocation();
+
   return (
     <SpinnerWrapperStyled>
       <SpinnerContainerStyled>
         <SpinnerStyled />
-        <div>Loading news...</div>
+        {location.pathname.includes("news") ? (
+          <div>Loading comments...</div>
+        ) : (
+          <div>Loading news...</div>
+        )}
       </SpinnerContainerStyled>
     </SpinnerWrapperStyled>
   );

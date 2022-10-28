@@ -41,6 +41,7 @@ interface NewsState {
   currentNews: CurrentNews;
   comments: Record<number, CurrentNewsParentComments>;
   areNewsLoaded: boolean;
+  areCommentsLoaded: boolean;
 }
 
 const initialState: NewsState = {
@@ -56,6 +57,7 @@ const initialState: NewsState = {
   },
   comments: {},
   areNewsLoaded: false,
+  areCommentsLoaded: false,
 };
 
 export const newsSlice = createSlice({
@@ -75,6 +77,9 @@ export const newsSlice = createSlice({
     setAreNewsLoaded: (state, action) => {
       state.areNewsLoaded = action.payload;
     },
+    setAreCommentsLoaded: (state, action) => {
+      state.areCommentsLoaded = action.payload;
+    },
   },
 });
 
@@ -83,6 +88,7 @@ export const {
   getCurrentNewsInfo,
   getCurrentNewsParentComments,
   setAreNewsLoaded,
+  setAreCommentsLoaded,
 } = newsSlice.actions;
 
 export const selectCurrentNewsInfo = (state: RootState) =>
@@ -90,13 +96,13 @@ export const selectCurrentNewsInfo = (state: RootState) =>
 export const selectDetailedNewsInfo = (state: RootState) =>
   state.news.newsDetails;
 
-export const selectCurrentNewsParentComments = (state: RootState) =>
-  state.news.comments;
-
 export const selectCurrentNewsCommentsArray = (state: RootState) =>
   Object.values(state.news.comments);
 
 export const selectAreNewsLoaded = (state: RootState) =>
   state.news.areNewsLoaded;
+
+export const selectAreCommentsLoaded = (state: RootState) =>
+  state.news.areCommentsLoaded;
 
 export default newsSlice.reducer;

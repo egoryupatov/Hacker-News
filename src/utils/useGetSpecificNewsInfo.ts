@@ -3,6 +3,7 @@ import { useCallback, useEffect } from "react";
 import {
   getCurrentNewsInfo,
   getCurrentNewsParentComments,
+  setAreCommentsLoaded,
 } from "../store/newsSlice";
 
 export const useGetSpecificNewsInfo = () => {
@@ -22,6 +23,8 @@ export const useGetSpecificNewsInfo = () => {
           })
         ).then((comments) => dispatch(getCurrentNewsParentComments(comments)));
       });
+
+    dispatch(setAreCommentsLoaded(true));
   }, []);
 
   return [getComments];

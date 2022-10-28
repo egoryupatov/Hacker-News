@@ -22,7 +22,7 @@ export const News = () => {
   }, []);
 
   const detailedNewsInfo = useAppSelector(selectDetailedNewsInfo);
-  let areNewsLoaded = useAppSelector(selectAreNewsLoaded);
+  const areNewsLoaded = useAppSelector(selectAreNewsLoaded);
 
   return (
     <>
