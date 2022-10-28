@@ -1,13 +1,15 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { RootState } from "./store";
+import { keyBy } from "lodash";
 
 export interface CurrentNewsParentComments {
   by: string;
-  kids?: number[];
-  parent?: number;
+  kids: number[];
+  parent: number;
   text: string;
   time: number;
   type: string;
+  id: number;
 }
 
 interface Kids {
@@ -35,14 +37,13 @@ interface PostInfo {
 }
 
 interface NewsState {
-  latestNewsID: number[];
   newsDetails: PostInfo[];
   currentNews: CurrentNews;
-  currentNewsParentComments: CurrentNewsParentComments[];
+  comments: Record<number, CurrentNewsParentComments>;
+  areNewsLoaded: boolean;
 }
 
 const initialState: NewsState = {
-  latestNewsID: [],
   newsDetails: [],
   currentNews: {
     title: "",
@@ -53,41 +54,49 @@ const initialState: NewsState = {
     kids: [],
     score: 0,
   },
-  currentNewsParentComments: [],
+  comments: {},
+  areNewsLoaded: false,
 };
 
 export const newsSlice = createSlice({
   name: "news",
   initialState,
   reducers: {
-    getLatestNews: (state, action) => {
-      state.latestNewsID = action.payload;
-    },
     getDetailedNewsInfo: (state, action) => {
-      state.newsDetails.push(action.payload);
+      console.log(action.payload);
+      state.newsDetails = action.payload;
     },
     getCurrentNewsInfo: (state, action) => {
       state.currentNews = action.payload;
     },
     getCurrentNewsParentComments: (state, action) => {
-      state.currentNewsParentComments.push(action.payload);
+      state.comments = { ...state.comments, ...keyBy(action.payload, "id") };
+    },
+    setAreNewsLoaded: (state, action) => {
+      state.areNewsLoaded = action.payload;
     },
   },
 });
 
 export const {
-  getLatestNews,
   getDetailedNewsInfo,
   getCurrentNewsInfo,
   getCurrentNewsParentComments,
+  setAreNewsLoaded,
 } = newsSlice.actions;
 
-export const selectLatestNews = (state: RootState) => state.news.latestNewsID;
 export const selectCurrentNewsInfo = (state: RootState) =>
   state.news.currentNews;
 export const selectDetailedNewsInfo = (state: RootState) =>
   state.news.newsDetails;
+
 export const selectCurrentNewsParentComments = (state: RootState) =>
-  state.news.currentNewsParentComments;
+  state.news.comments;
+
+export const selectCurrentNewsCommentsArray = (state: RootState) =>
+  Object.values(state.news.comments);
+
+export const selectAreNewsLoaded = (state: RootState) =>
+  state.news.areNewsLoaded;
 
 export default newsSlice.reducer;

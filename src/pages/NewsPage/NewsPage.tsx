@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import {
   NewsPageContainerStyled,
@@ -9,26 +9,42 @@ import {
   NewsPageChildCommentContainerStyled,
   NewsPageCommentTitleStyled,
   NewsPageCommentBodyStyled,
+  NewsPageParentCommentContainerStyled,
 } from "./NewsPage.styled";
 import { useGetSpecificNewsInfo } from "../../utils/useGetSpecificNewsInfo";
 import { useAppSelector } from "../../store/hooks";
-import {
-  selectCurrentNewsInfo,
-  selectCurrentNewsParentComments,
-} from "../../store/newsSlice";
-import { NewsContainerStyled } from "../../components/News/News.styled";
+import { selectCurrentNewsInfo } from "../../store/newsSlice";
+import { selectCurrentNewsCommentsArray } from "../../store/newsSlice";
+import { useGetComment } from "../../utils/useGetComment";
+
+const newsID = 8863;
 
 export const NewsPage = () => {
   const params = useParams();
 
-  //не забыть потом поменять обратно на парамс ид
+  const [getNewsWithComments] = useGetSpecificNewsInfo();
+  const [getComment] = useGetComment();
 
-  useGetSpecificNewsInfo(33349296);
+  useEffect(() => {
+    getNewsWithComments(newsID);
+  }, []);
+
+  //Number(params.id)
 
   const selectCurrentNews = useAppSelector(selectCurrentNewsInfo);
   const selectCurrentParentComments = useAppSelector(
-    selectCurrentNewsParentComments
+    selectCurrentNewsCommentsArray
   );
+
+  const comments = selectCurrentParentComments.filter((comment) => {
+    return comment.parent === newsID;
+  });
+
+  const handleClickOnComment = (commentsID: number[]) => {
+    commentsID.forEach((id: number) => {
+      getComment(id);
+    });
+  };
 
   return (
     <>
@@ -57,11 +73,11 @@ export const NewsPage = () => {
       </NewsPageContainerStyled>
 
       <NewsPageCommentSectionStyled>
-        {selectCurrentParentComments.map((comment) =>
+        {comments.map((comment) =>
           !comment.text ? (
             ""
           ) : (
-            <NewsPageChildCommentContainerStyled>
+            <NewsPageParentCommentContainerStyled>
               <NewsPageCommentTitleStyled>
                 <p>{comment.by}</p>
                 <p>
@@ -72,12 +88,30 @@ export const NewsPage = () => {
                     : new Date(comment.time * 1000).getMinutes() +
                       " minutes ago"}
                 </p>
+
+                {comment.kids && comment.kids.length > 0 && (
+                  <p>
+                    | this comment has {comment.kids.length} child comments.{" "}
+                    <button onClick={() => handleClickOnComment(comment.kids)}>
+                      Click to see them
+                    </button>
+                  </p>
+                )}
               </NewsPageCommentTitleStyled>
 
               <NewsPageCommentBodyStyled>
                 {comment.text}
+                <div>
+                  {selectCurrentParentComments
+                    .filter((comment2) => {
+                      return comment2.parent === comment.id;
+                    })
+                    .map((comment2) => (
+                      <div>{comment2.by}</div>
+                    ))}
+                </div>
               </NewsPageCommentBodyStyled>
-            </NewsPageChildCommentContainerStyled>
+            </NewsPageParentCommentContainerStyled>
           )
         )}
       </NewsPageCommentSectionStyled>

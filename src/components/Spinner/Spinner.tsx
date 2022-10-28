@@ -1,11 +1,17 @@
 import React from "react";
-import { SpinnerStyled, SpinnerContainerStyled } from "./Spinner.styled";
+import {
+  SpinnerStyled,
+  SpinnerContainerStyled,
+  SpinnerWrapperStyled,
+} from "./Spinner.styled";
 
 export const Spinner = () => {
   return (
-    <SpinnerContainerStyled>
-      <SpinnerStyled />
-      Loading news...
-    </SpinnerContainerStyled>
+    <SpinnerWrapperStyled>
+      <SpinnerContainerStyled>
+        <SpinnerStyled />
+        <div>Loading news...</div>
+      </SpinnerContainerStyled>
+    </SpinnerWrapperStyled>
   );
 };

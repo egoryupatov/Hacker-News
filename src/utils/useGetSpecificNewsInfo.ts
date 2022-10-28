@@ -1,31 +1,28 @@
 import { useDispatch } from "react-redux";
-import { useEffect } from "react";
-import { useAppSelector } from "../store/hooks";
+import { useCallback, useEffect } from "react";
 import {
-  selectCurrentNewsInfo,
   getCurrentNewsInfo,
   getCurrentNewsParentComments,
-  selectCurrentNewsParentComments,
 } from "../store/newsSlice";
 
-export const useGetSpecificNewsInfo = (id: number) => {
+export const useGetSpecificNewsInfo = () => {
   const dispatch = useDispatch();
 
-  useEffect(() => {
+  const getComments = useCallback((id: number) => {
     fetch(`https://hacker-news.firebaseio.com/v0/item/${id}.json?print=pretty`)
       .then((response) => response.json())
       .then((response) => {
         dispatch(getCurrentNewsInfo(response));
 
-        response.kids.forEach((comment: any) => {
-          fetch(
-            `https://hacker-news.firebaseio.com/v0/item/${comment}.json?print=pretty`
-          )
-            .then((response) => response.json())
-            .then((response) =>
-              dispatch(getCurrentNewsParentComments(response))
-            );
-        });
+        Promise.all(
+          response.kids.map((comment: any) => {
+            return fetch(
+              `https://hacker-news.firebaseio.com/v0/item/${comment}.json?print=pretty`
+            ).then((response) => response.json());
+          })
+        ).then((comments) => dispatch(getCurrentNewsParentComments(comments)));
       });
   }, []);
+
+  return [getComments];
 };

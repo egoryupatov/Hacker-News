@@ -41,7 +41,9 @@ export const NewsPageTitleStyled = styled(NewsTitleStyled)`
 `;
 
 export const NewsPageTitleURLStyled = styled.div`
-  font-size: 12px;
+  display: flex;
+  font-size: 13px;
+  align-items: center;
 
   a {
     color: #808080;
