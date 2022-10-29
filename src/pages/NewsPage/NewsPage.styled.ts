@@ -5,9 +5,9 @@ import {
   NewsTitleStyled,
 } from "../../components/News/News.styled";
 
-export const NewsPageContainerStyled = styled(NewsContainerStyled)``;
+export const TitleSectionStyled = styled(NewsContainerStyled)``;
 
-export const NewsPageCommentSectionStyled = styled.div`
+export const CommentSectionStyled = styled.div`
   display: flex;
   flex-direction: column;
   padding: 20px;
@@ -15,7 +15,7 @@ export const NewsPageCommentSectionStyled = styled.div`
   margin-bottom: 15px;
 `;
 
-export const NewsPageParentCommentContainerStyled = styled.div`
+export const ParentCommentContainerStyled = styled.div`
   display: flex;
   flex-direction: column;
   padding: 20px;
@@ -69,7 +69,7 @@ export const CommentBodyStyled = styled.div`
   color: #3c4043;
 `;
 
-export const ChildCommentStyled = styled.div`
+export const ChildCommentContainerStyled = styled.div`
   display: flex;
   flex-direction: column;
   font-size: 14px;

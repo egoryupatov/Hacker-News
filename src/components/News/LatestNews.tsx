@@ -14,7 +14,7 @@ import { Link } from "react-router-dom";
 import { Spinner } from "../Spinner/Spinner";
 import { useEffect } from "react";
 
-export const News = () => {
+export const LatestNews = () => {
   const [getNews] = useGetDetailedNewsInfo();
 
   useEffect(() => {

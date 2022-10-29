@@ -21,7 +21,7 @@ export const NewsInfoStyled = styled.div`
   flex-direction: row;
   gap: 5px;
   color: #808080;
-  font-size: 12px;
+  font-size: 13px;
 
   a {
     color: #808080;

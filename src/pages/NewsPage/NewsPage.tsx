@@ -1,25 +1,24 @@
 import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import {
-  NewsPageContainerStyled,
+  TitleSectionStyled,
   NewsPageInfoStyled,
   NewsPageTitleStyled,
   NewsPageTitleURLStyled,
-  NewsPageCommentSectionStyled,
+  CommentSectionStyled,
   CommentTitleStyled,
   CommentBodyStyled,
-  NewsPageParentCommentContainerStyled,
+  ParentCommentContainerStyled,
 } from "./NewsPage.styled";
 import { useGetSpecificNewsInfo } from "../../utils/useGetSpecificNewsInfo";
 import { useAppSelector } from "../../store/hooks";
 import {
   selectAreCommentsLoaded,
   selectCurrentNewsInfo,
-  setAreCommentsLoaded,
 } from "../../store/newsSlice";
 import { selectCurrentNewsCommentsArray } from "../../store/newsSlice";
 import { useGetComment } from "../../utils/useGetComment";
-import { ChildCommentStyled } from "./NewsPage.styled";
+import { ChildCommentContainerStyled } from "./NewsPage.styled";
 import { Spinner } from "../../components/Spinner/Spinner";
 
 const newsID = 33360171;
@@ -42,7 +41,7 @@ export const NewsPage = () => {
     selectCurrentNewsCommentsArray
   );
 
-  const comments = selectCurrentParentComments.filter((comment) => {
+  const parentComments = selectCurrentParentComments.filter((comment) => {
     return comment.parent === newsID;
   });
 
@@ -56,14 +55,13 @@ export const NewsPage = () => {
     <>
       {areCommentsLoaded ? (
         <>
-          <NewsPageContainerStyled>
+          <TitleSectionStyled>
             <NewsPageTitleStyled>
               {selectCurrentNews.title}
-              <NewsPageInfoStyled>
-                <NewsPageTitleURLStyled>
-                  (<a href={selectCurrentNews.url}>{selectCurrentNews.url}</a>)
-                </NewsPageTitleURLStyled>
-              </NewsPageInfoStyled>
+
+              <NewsPageTitleURLStyled>
+                (<a href={selectCurrentNews.url}>{selectCurrentNews.url}</a>)
+              </NewsPageTitleURLStyled>
             </NewsPageTitleStyled>
             <NewsPageInfoStyled>
               <p>{selectCurrentNews.score} points</p>
@@ -78,70 +76,74 @@ export const NewsPage = () => {
               </p>
               <p>| {selectCurrentNews.descendants} comments</p>
             </NewsPageInfoStyled>
-          </NewsPageContainerStyled>
+          </TitleSectionStyled>
 
-          <NewsPageCommentSectionStyled>
-            {comments.map((comment) =>
-              !comment.text ? (
+          <CommentSectionStyled>
+            {parentComments.map((parentComment) =>
+              !parentComment.text ? (
                 ""
               ) : (
-                <NewsPageParentCommentContainerStyled>
+                <ParentCommentContainerStyled>
                   <CommentTitleStyled>
-                    <p>{comment.by}</p>
+                    <p>{parentComment.by}</p>
                     <p>
-                      {new Date(comment.time * 1000).getMinutes() > 60
+                      {new Date(parentComment.time * 1000).getMinutes() > 60
                         ? Math.floor(
-                            new Date(comment.time * 1000).getMinutes() / 60
+                            new Date(parentComment.time * 1000).getMinutes() /
+                              60
                           ) + " hours ago"
-                        : new Date(comment.time * 1000).getMinutes() +
+                        : new Date(parentComment.time * 1000).getMinutes() +
                           " minutes ago"}
                     </p>
 
-                    {comment.kids && comment.kids.length > 0 && (
+                    {parentComment.kids && parentComment.kids.length > 0 && (
                       <p>
                         | this comment has{" "}
                         <span
-                          onClick={() => handleClickOnComment(comment.kids)}
+                          onClick={() =>
+                            handleClickOnComment(parentComment.kids)
+                          }
                         >
-                          {comment.kids.length} child comment
-                          {comment.kids.length > 1 ? "s" : ""} ▼
+                          {parentComment.kids.length} child comment
+                          {parentComment.kids.length > 1 ? "s" : ""} ▼
                         </span>
                       </p>
                     )}
                   </CommentTitleStyled>
+                  <CommentBodyStyled>{parentComment.text}</CommentBodyStyled>
 
-                  <CommentBodyStyled>{comment.text}</CommentBodyStyled>
-
-                  <ChildCommentStyled>
+                  <ChildCommentContainerStyled>
                     {selectCurrentParentComments
-                      .filter((comment2) => {
-                        return comment2.parent === comment.id;
+                      .filter((childComment) => {
+                        return childComment.parent === parentComment.id;
                       })
-                      .map((comment2) => (
+                      .map((childComment) => (
                         <>
                           <CommentTitleStyled>
-                            <p>▲ {comment2.by}</p>
+                            <p>▲ {childComment.by}</p>
                             <p>
-                              {new Date(comment2.time * 1000).getMinutes() > 60
+                              {new Date(childComment.time * 1000).getMinutes() >
+                              60
                                 ? Math.floor(
                                     new Date(
-                                      comment2.time * 1000
+                                      childComment.time * 1000
                                     ).getMinutes() / 60
                                   ) + " hours ago"
-                                : new Date(comment2.time * 1000).getMinutes() +
-                                  " minutes ago"}
+                                : new Date(
+                                    childComment.time * 1000
+                                  ).getMinutes() + " minutes ago"}
                             </p>
                           </CommentTitleStyled>
                           <CommentBodyStyled>
-                            <p>{comment2.text}</p>
+                            <p>{childComment.text}</p>
                           </CommentBodyStyled>
                         </>
                       ))}
-                  </ChildCommentStyled>
-                </NewsPageParentCommentContainerStyled>
+                  </ChildCommentContainerStyled>
+                </ParentCommentContainerStyled>
               )
             )}
-          </NewsPageCommentSectionStyled>
+          </CommentSectionStyled>
         </>
       ) : (
         <Spinner />
