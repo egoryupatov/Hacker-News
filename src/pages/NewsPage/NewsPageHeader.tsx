@@ -5,6 +5,7 @@ import {
   NewsPageTitleURLStyled,
   TitleSectionStyled,
 } from "./NewsPage.styled";
+import { getShortURL } from "../../utils/getShortURL";
 
 export const NewsPageHeader = (props: any) => {
   return (
@@ -15,7 +16,7 @@ export const NewsPageHeader = (props: any) => {
         <NewsPageTitleURLStyled>
           (
           <a href={props.selectCurrentNews.url}>
-            {props.selectCurrentNews.url}
+            {getShortURL(props.selectCurrentNews.url)}
           </a>
           )
         </NewsPageTitleURLStyled>

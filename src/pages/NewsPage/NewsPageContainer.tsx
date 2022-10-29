@@ -10,7 +10,7 @@ import { selectCurrentNewsCommentsArray } from "../../store/newsSlice";
 import { useGetComments } from "../../utils/useGetComments";
 import { NewsPage } from "./NewsPage";
 
-const newsID = 33360171;
+const newsID = 33382397;
 
 export const NewsPageContainer = () => {
   const areCommentsLoaded = useAppSelector(selectAreCommentsLoaded);

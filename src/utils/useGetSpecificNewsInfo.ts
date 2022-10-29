@@ -21,10 +21,11 @@ export const useGetSpecificNewsInfo = () => {
               `https://hacker-news.firebaseio.com/v0/item/${comment}.json?print=pretty`
             ).then((response) => response.json());
           })
-        ).then((comments) => dispatch(getCurrentNewsParentComments(comments)));
+        ).then((comments) => {
+          dispatch(getCurrentNewsParentComments(comments));
+          dispatch(setAreCommentsLoaded(true));
+        });
       });
-
-    dispatch(setAreCommentsLoaded(true));
   }, []);
 
   return [getComments];

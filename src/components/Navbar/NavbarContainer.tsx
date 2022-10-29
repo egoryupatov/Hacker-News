@@ -14,13 +14,15 @@ export const NavbarContainer = () => {
   const [getNewsWithComments] = useGetSpecificNewsInfo();
 
   const location = useLocation();
+
   const handleRefreshNewsClick = () => {
     getNews();
     dispatch(setAreNewsLoaded(false));
   };
+
   const handleRefreshCommentsClick = () => {
-    getNewsWithComments(newsID);
     dispatch(setAreCommentsLoaded(false));
+    getNewsWithComments(newsID);
   };
 
   return (

@@ -65,7 +65,6 @@ export const newsSlice = createSlice({
   initialState,
   reducers: {
     getDetailedNewsInfo: (state, action) => {
-      console.log(action.payload);
       state.newsDetails = action.payload;
     },
     getCurrentNewsInfo: (state, action) => {

@@ -67,6 +67,10 @@ export const CommentBodyStyled = styled.div`
   display: flex;
   font-size: 14px;
   color: #3c4043;
+
+  a {
+    text-decoration: underline;
+  }
 `;
 
 export const ChildCommentContainerStyled = styled.div`

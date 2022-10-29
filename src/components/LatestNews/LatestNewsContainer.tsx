@@ -5,13 +5,6 @@ import {
   selectDetailedNewsInfo,
 } from "../../store/newsSlice";
 import { useGetNews } from "../../utils/useGetNews";
-import {
-  NewsInfoStyled,
-  NewsTitleStyled,
-  NewsContainerStyled,
-} from "./News.styled";
-import { Link } from "react-router-dom";
-import { Spinner } from "../Spinner/Spinner";
 import { useEffect } from "react";
 import { LatestNews } from "./LatestNews";
 
@@ -20,6 +13,10 @@ export const LatestNewsContainer = () => {
 
   useEffect(() => {
     getNews();
+    const getNewsInterval = setInterval(() => {
+      getNews();
+    }, 1000 * 60);
+    return () => clearInterval(getNewsInterval);
   }, []);
 
   const detailedNewsInfo = useAppSelector(selectDetailedNewsInfo);

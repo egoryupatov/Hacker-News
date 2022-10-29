@@ -6,6 +6,7 @@ import {
 } from "./News.styled";
 import { Link } from "react-router-dom";
 import { Spinner } from "../Spinner/Spinner";
+import { getTimeAgo } from "../../utils/getTimeAgo";
 
 export const LatestNews = (props: any) => {
   return (
@@ -20,12 +21,7 @@ export const LatestNews = (props: any) => {
             <NewsInfoStyled>
               <p>{news.score} points</p>
               <p>by {news.by}</p>
-              <p>
-                {new Date(news.time * 1000).getMinutes() > 60
-                  ? Math.floor(new Date(news.time * 1000).getMinutes() / 60) +
-                    " hours ago"
-                  : new Date(news.time * 1000).getMinutes() + " minutes ago"}
-              </p>
+              <p>{getTimeAgo(news.time)}</p>
               <p>
                 |{" "}
                 <Link to={`/news/${news.id}`}>{news.descendants} comments</Link>
