@@ -1,11 +1,11 @@
 import React from "react";
 import { PageContainer } from "../../styles/general.styled";
-import { LatestNews } from "../../components/News/LatestNews";
+import { LatestNewsContainer } from "../../components/LatestNews/LatestNewsContainer";
 
 export const Homepage = () => {
   return (
     <PageContainer>
-      <LatestNews />
+      <LatestNewsContainer />
     </PageContainer>
   );
 };

@@ -7,7 +7,7 @@ import {
 import { useAppSelector } from "../store/hooks";
 import { useCallback } from "react";
 
-export const useGetDetailedNewsInfo = () => {
+export const useGetNews = () => {
   const dispatch = useDispatch();
   const areNewsLoaded = useAppSelector(selectAreNewsLoaded);
 

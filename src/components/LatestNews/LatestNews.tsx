@@ -1,33 +1,17 @@
 import React from "react";
-import { useAppSelector } from "../../store/hooks";
 import {
-  selectAreNewsLoaded,
-  selectDetailedNewsInfo,
-} from "../../store/newsSlice";
-import { useGetDetailedNewsInfo } from "../../utils/useGetDetailedNewsInfo";
-import {
+  NewsContainerStyled,
   NewsInfoStyled,
   NewsTitleStyled,
-  NewsContainerStyled,
 } from "./News.styled";
 import { Link } from "react-router-dom";
 import { Spinner } from "../Spinner/Spinner";
-import { useEffect } from "react";
 
-export const LatestNews = () => {
-  const [getNews] = useGetDetailedNewsInfo();
-
-  useEffect(() => {
-    getNews();
-  }, []);
-
-  const detailedNewsInfo = useAppSelector(selectDetailedNewsInfo);
-  const areNewsLoaded = useAppSelector(selectAreNewsLoaded);
-
+export const LatestNews = (props: any) => {
   return (
     <>
-      {areNewsLoaded ? (
-        detailedNewsInfo.map((news, i) => (
+      {props.areNewsLoaded ? (
+        props.detailedNewsInfo.map((news: any, i: number) => (
           <NewsContainerStyled key={news.id}>
             <NewsTitleStyled>
               {i + 1 + "."}

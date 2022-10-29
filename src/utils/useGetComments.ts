@@ -5,7 +5,7 @@ import {
   getCurrentNewsParentComments,
 } from "../store/newsSlice";
 
-export const useGetComment = () => {
+export const useGetComments = () => {
   const dispatch = useDispatch();
 
   const getComment = useCallback((id: number) => {

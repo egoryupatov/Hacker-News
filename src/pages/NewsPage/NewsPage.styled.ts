@@ -3,7 +3,7 @@ import {
   NewsContainerStyled,
   NewsInfoStyled,
   NewsTitleStyled,
-} from "../../components/News/News.styled";
+} from "../../components/LatestNews/News.styled";
 
 export const TitleSectionStyled = styled(NewsContainerStyled)``;
 

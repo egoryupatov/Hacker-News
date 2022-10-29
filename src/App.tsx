@@ -1,17 +1,17 @@
 import React from "react";
 import { Homepage } from "./pages/Homepage/Homepage";
 import { WrapperStyled } from "./styles/general.styled";
-import { Navbar } from "./components/Navbar/Navbar";
+import { NavbarContainer } from "./components/Navbar/NavbarContainer";
 import { Routes, Route } from "react-router-dom";
-import { NewsPage } from "./pages/NewsPage/NewsPage";
+import { NewsPageContainer } from "./pages/NewsPage/NewsPageContainer";
 
 function App() {
   return (
     <WrapperStyled>
-      <Navbar />
+      <NavbarContainer />
       <Routes>
         <Route path="/" element={<Homepage />} />
-        <Route path="/news/:id" element={<NewsPage />} />
+        <Route path="/news/:id" element={<NewsPageContainer />} />
       </Routes>
     </WrapperStyled>
   );
