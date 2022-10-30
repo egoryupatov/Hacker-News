@@ -25,6 +25,7 @@ export interface CurrentNews {
   by: string;
   descendants: number;
   kids: Kids[];
+  text: string;
 }
 
 export interface PostInfo {
@@ -54,6 +55,7 @@ const initialState: NewsState = {
     descendants: 0,
     kids: [],
     score: 0,
+    text: "",
   },
   comments: {},
   areNewsLoaded: false,

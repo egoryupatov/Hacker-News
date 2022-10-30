@@ -72,6 +72,17 @@ export const ChildCommentContainerStyled = styled.div`
   gap: 15px;
 `;
 
+export const NewsPageInfoStyled = styled(LatestNewsBodyStyled)`
+  display: flex;
+  flex-direction: row;
+`;
+
 export const NewsPageDescriptionStyled = styled(LatestNewsBodyStyled)`
   font-size: 13px;
+  flex-direction: column;
+`;
+
+export const ParentNewsTextStyled = styled.div`
+  display: flex;
+  font-size: 14px;
 `;

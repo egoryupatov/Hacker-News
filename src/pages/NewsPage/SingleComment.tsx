@@ -52,17 +52,23 @@ export const SingleComment: React.FC<SingleCommentProps> = (props) => {
             .filter((childComment: CurrentNewsParentComments) => {
               return childComment.parent === props.parentComment.id;
             })
-            .map((childComment: CurrentNewsParentComments) => (
-              <>
-                <CommentTitleStyled key={childComment.id}>
-                  <p>▲ {childComment.by}</p>
-                  <p>{getTimeAgo(childComment.time)}</p>
-                </CommentTitleStyled>
-                <CommentBodyStyled>
-                  <p>{childComment.text}</p>
-                </CommentBodyStyled>
-              </>
-            ))}
+            .map((childComment: CurrentNewsParentComments) =>
+              childComment.text === undefined ? (
+                ""
+              ) : (
+                <>
+                  <CommentTitleStyled key={childComment.id}>
+                    <p>▲ {childComment.by}</p>
+                    <p>{getTimeAgo(childComment.time)}</p>
+                  </CommentTitleStyled>
+                  <CommentBodyStyled>
+                    <div
+                      dangerouslySetInnerHTML={{ __html: childComment.text }}
+                    ></div>
+                  </CommentBodyStyled>
+                </>
+              )
+            )}
         </ChildCommentContainerStyled>
       )}
     </ParentCommentContainerStyled>

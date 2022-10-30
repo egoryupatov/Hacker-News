@@ -15,7 +15,7 @@ interface NewsPageProps {
 export const NewsPage: React.FC<NewsPageProps> = (props) => {
   return (
     <>
-      {props.areCommentsLoaded ? (
+      {props.areCommentsLoaded || !props.selectCurrentNews.kids ? (
         <>
           <NewsPageHeader selectCurrentNews={props.selectCurrentNews} />
           <NewsPageComments
