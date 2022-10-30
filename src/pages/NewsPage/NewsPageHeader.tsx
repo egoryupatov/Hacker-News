@@ -2,7 +2,7 @@ import React from "react";
 import {
   NewsPageDescriptionStyled,
   NewsPageTitleStyled,
-  NewsPageTitleURLStyled,
+  TitleURLStyled,
   NewsPageHeaderStyled,
 } from "./NewsPage.styled";
 import { getShortURL } from "../../utils/getShortURL";
@@ -20,7 +20,7 @@ export const NewsPageHeader: React.FC<NewsPageHeaderProps> = (props) => {
       <NewsPageTitleStyled>
         {props.selectCurrentNews.title}
 
-        <NewsPageTitleURLStyled>
+        <TitleURLStyled>
           {props.selectCurrentNews.url ? (
             <a href={props.selectCurrentNews.url}>
               ({getShortURL(props.selectCurrentNews.url)})
@@ -28,7 +28,7 @@ export const NewsPageHeader: React.FC<NewsPageHeaderProps> = (props) => {
           ) : (
             ""
           )}
-        </NewsPageTitleURLStyled>
+        </TitleURLStyled>
       </NewsPageTitleStyled>
 
       <NewsPageDescriptionStyled>

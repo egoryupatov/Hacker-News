@@ -15,17 +15,20 @@ export const useGetSpecificNewsInfo = () => {
       .then((response) => response.json())
       .then((response) => {
         dispatch(getCurrentNewsInfo(response));
-
-        Promise.all(
-          response.kids.map((comment: CurrentNewsParentComments) => {
-            return fetch(
-              `https://hacker-news.firebaseio.com/v0/item/${comment}.json?print=pretty`
-            ).then((response) => response.json());
-          })
-        ).then((comments) => {
-          dispatch(getCurrentNewsParentComments(comments));
+        if (response.kids) {
+          Promise.all(
+            response.kids.map((comment: CurrentNewsParentComments) => {
+              return fetch(
+                `https://hacker-news.firebaseio.com/v0/item/${comment}.json?print=pretty`
+              ).then((response) => response.json());
+            })
+          ).then((comments) => {
+            dispatch(getCurrentNewsParentComments(comments));
+            dispatch(setAreCommentsLoaded(true));
+          });
+        } else {
           dispatch(setAreCommentsLoaded(true));
-        });
+        }
       });
   }, []);
 

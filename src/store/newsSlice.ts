@@ -35,6 +35,7 @@ export interface PostInfo {
   time: number;
   id: number;
   descendants: number;
+  url: string;
 }
 
 interface NewsState {

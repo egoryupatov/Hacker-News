@@ -8,6 +8,8 @@ import { Link } from "react-router-dom";
 import { Spinner } from "../Spinner/Spinner";
 import { getTimeAgo } from "../../utils/getTimeAgo";
 import { PostInfo } from "../../store/newsSlice";
+import { getShortURL } from "../../utils/getShortURL";
+import { TitleURLStyled } from "../../pages/NewsPage/NewsPage.styled";
 
 export interface LatestNewsProps {
   areNewsLoaded: boolean;
@@ -23,7 +25,16 @@ export const LatestNews: React.FC<LatestNewsProps> = (props) => {
             <LatestNewsTitleStyled>
               {i + 1 + "."}
               <Link to={`/news/${news.id}`}>{news.title}</Link>
+
+              <TitleURLStyled>
+                {news.url ? (
+                  <a href={news.url}>({getShortURL(news.url)})</a>
+                ) : (
+                  ""
+                )}
+              </TitleURLStyled>
             </LatestNewsTitleStyled>
+
             <LatestNewsBodyStyled>
               <p>{news.score} points</p>
               <p>by {news.by}</p>

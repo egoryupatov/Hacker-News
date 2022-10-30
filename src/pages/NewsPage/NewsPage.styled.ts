@@ -30,7 +30,7 @@ export const NewsPageTitleStyled = styled(LatestNewsTitleStyled)`
   color: #3c4043;
 `;
 
-export const NewsPageTitleURLStyled = styled.div`
+export const TitleURLStyled = styled.div`
   display: flex;
   font-size: 13px;
   align-items: center;
