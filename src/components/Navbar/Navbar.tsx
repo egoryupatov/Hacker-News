@@ -1,13 +1,22 @@
 import React from "react";
-import { NavBarButtonsContainerStyled, NavbarStyled } from "./Navbar.styled";
-import { Link } from "react-router-dom";
+import {
+  NavbarButtonsContainerStyled,
+  NavbarContainerStyled,
+} from "./NavbarContainerStyled";
+import { Link, Location } from "react-router-dom";
 import { ButtonStyled } from "../../styles/general.styled";
 
-export const Navbar = (props: any) => {
+interface NavbarProps {
+  handleRefreshCommentsClick: () => void;
+  handleRefreshNewsClick: () => void;
+  location: Location;
+}
+
+export const Navbar: React.FC<NavbarProps> = (props) => {
   return (
-    <NavbarStyled>
+    <NavbarContainerStyled>
       <div>Hacker News</div>
-      <NavBarButtonsContainerStyled>
+      <NavbarButtonsContainerStyled>
         <Link to={"/"}>
           <ButtonStyled>Go Home</ButtonStyled>
         </Link>
@@ -21,7 +30,7 @@ export const Navbar = (props: any) => {
             Refresh news
           </ButtonStyled>
         )}
-      </NavBarButtonsContainerStyled>
-    </NavbarStyled>
+      </NavbarButtonsContainerStyled>
+    </NavbarContainerStyled>
   );
 };

@@ -1,9 +1,6 @@
 import { useDispatch } from "react-redux";
-import { useCallback, useEffect } from "react";
-import {
-  getCurrentNewsInfo,
-  getCurrentNewsParentComments,
-} from "../store/newsSlice";
+import { useCallback } from "react";
+import { getCurrentNewsParentComments } from "../store/newsSlice";
 
 export const useGetComments = () => {
   const dispatch = useDispatch();

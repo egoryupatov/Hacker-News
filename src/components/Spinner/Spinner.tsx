@@ -5,12 +5,9 @@ import {
   SpinnerWrapperStyled,
 } from "./Spinner.styled";
 import { useLocation } from "react-router-dom";
-import { useAppSelector } from "../../store/hooks";
-import { selectDetailedNewsInfo } from "../../store/newsSlice";
 
-export const Spinner = () => {
+export const Spinner: React.FC = () => {
   const location = useLocation();
-  const selectNewsNumber = useAppSelector(selectDetailedNewsInfo);
 
   return (
     <SpinnerWrapperStyled>

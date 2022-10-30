@@ -1,13 +1,13 @@
 import styled from "styled-components";
 import {
-  NewsContainerStyled,
-  NewsInfoStyled,
-  NewsTitleStyled,
-} from "../../components/LatestNews/News.styled";
+  LatestNewsContainerStyled,
+  LatestNewsBodyStyled,
+  LatestNewsTitleStyled,
+} from "../../components/LatestNews/LatestNews.styled";
 
-export const TitleSectionStyled = styled(NewsContainerStyled)``;
+export const NewsPageHeaderStyled = styled(LatestNewsContainerStyled)``;
 
-export const CommentSectionStyled = styled.div`
+export const NewsPageCommentsStyled = styled.div`
   display: flex;
   flex-direction: column;
   padding: 20px;
@@ -24,17 +24,7 @@ export const ParentCommentContainerStyled = styled.div`
   background: #f6f6ef;
 `;
 
-export const NewsPageChildCommentContainerStyled = styled.div`
-  display: flex;
-  flex-direction: column;
-  padding: 20px;
-  gap: 15px;
-  margin-bottom: 15px;
-  background: #f6f6ef;
-  margin-left: 40px;
-`;
-
-export const NewsPageTitleStyled = styled(NewsTitleStyled)`
+export const NewsPageTitleStyled = styled(LatestNewsTitleStyled)`
   justify-content: start;
   gap: 10px;
   color: #3c4043;
@@ -82,6 +72,6 @@ export const ChildCommentContainerStyled = styled.div`
   gap: 15px;
 `;
 
-export const NewsPageInfoStyled = styled(NewsInfoStyled)`
+export const NewsPageDescriptionStyled = styled(LatestNewsBodyStyled)`
   font-size: 13px;
 `;

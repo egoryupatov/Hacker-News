@@ -17,7 +17,7 @@ interface Kids {
   time: number;
 }
 
-interface CurrentNews {
+export interface CurrentNews {
   url: string;
   title: string;
   score: number;
@@ -27,7 +27,7 @@ interface CurrentNews {
   kids: Kids[];
 }
 
-interface PostInfo {
+export interface PostInfo {
   title: string;
   score: number;
   by: string;

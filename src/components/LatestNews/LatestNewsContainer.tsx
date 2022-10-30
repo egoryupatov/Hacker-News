@@ -8,7 +8,7 @@ import { useGetNews } from "../../utils/useGetNews";
 import { useEffect } from "react";
 import { LatestNews } from "./LatestNews";
 
-export const LatestNewsContainer = () => {
+export const LatestNewsContainer: React.FC = () => {
   const [getNews] = useGetNews();
 
   useEffect(() => {

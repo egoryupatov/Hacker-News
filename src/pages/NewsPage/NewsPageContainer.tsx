@@ -10,43 +10,37 @@ import { selectCurrentNewsCommentsArray } from "../../store/newsSlice";
 import { useGetComments } from "../../utils/useGetComments";
 import { NewsPage } from "./NewsPage";
 
-const newsID = 33382397;
-
-export const NewsPageContainer = () => {
+export const NewsPageContainer: React.FC = () => {
   const areCommentsLoaded = useAppSelector(selectAreCommentsLoaded);
   const params = useParams();
 
-  const [getNewsWithComments] = useGetSpecificNewsInfo();
-  const [getComment] = useGetComments();
+  const [getCurrentNews] = useGetSpecificNewsInfo();
+  const [getCurrentNewsComments] = useGetComments();
 
   useEffect(() => {
-    getNewsWithComments(newsID);
+    getCurrentNews(Number(params.id));
   }, []);
 
-  //Number(params.id)
+  const currentNews = useAppSelector(selectCurrentNewsInfo);
+  const currentNewsComments = useAppSelector(selectCurrentNewsCommentsArray);
 
-  const selectCurrentNews = useAppSelector(selectCurrentNewsInfo);
-  const selectCurrentParentComments = useAppSelector(
-    selectCurrentNewsCommentsArray
-  );
-
-  const parentComments = selectCurrentParentComments.filter((comment) => {
-    return comment.parent === newsID;
+  const currentNewsCommentParents = currentNewsComments.filter((comment) => {
+    return comment.parent === Number(params.id);
   });
 
   const handleClickOnComment = (commentsID: number[]) => {
     commentsID.forEach((id: number) => {
-      getComment(id);
+      getCurrentNewsComments(id);
     });
   };
 
   return (
     <NewsPage
       areCommentsLoaded={areCommentsLoaded}
-      selectCurrentNews={selectCurrentNews}
-      parentComments={parentComments}
+      selectCurrentNews={currentNews}
+      parentComments={currentNewsCommentParents}
       handleClickOnComment={handleClickOnComment}
-      selectCurrentParentComments={selectCurrentParentComments}
+      selectCurrentParentComments={currentNewsComments}
     />
   );
 };

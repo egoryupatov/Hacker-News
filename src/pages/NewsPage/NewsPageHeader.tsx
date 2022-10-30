@@ -1,15 +1,21 @@
 import React from "react";
 import {
-  NewsPageInfoStyled,
+  NewsPageDescriptionStyled,
   NewsPageTitleStyled,
   NewsPageTitleURLStyled,
-  TitleSectionStyled,
+  NewsPageHeaderStyled,
 } from "./NewsPage.styled";
 import { getShortURL } from "../../utils/getShortURL";
+import { CurrentNews } from "../../store/newsSlice";
+import { getTimeAgo } from "../../utils/getTimeAgo";
 
-export const NewsPageHeader = (props: any) => {
+interface NewsPageHeaderProps {
+  selectCurrentNews: CurrentNews;
+}
+
+export const NewsPageHeader: React.FC<NewsPageHeaderProps> = (props) => {
   return (
-    <TitleSectionStyled>
+    <NewsPageHeaderStyled>
       <NewsPageTitleStyled>
         {props.selectCurrentNews.title}
 
@@ -21,19 +27,13 @@ export const NewsPageHeader = (props: any) => {
           )
         </NewsPageTitleURLStyled>
       </NewsPageTitleStyled>
-      <NewsPageInfoStyled>
+
+      <NewsPageDescriptionStyled>
         <p>{props.selectCurrentNews.score} points</p>
         <p>by {props.selectCurrentNews.by}</p>
-        <p>
-          {new Date(props.selectCurrentNews.time * 1000).getMinutes() > 60
-            ? Math.floor(
-                new Date(props.selectCurrentNews.time * 1000).getMinutes() / 60
-              ) + " hours ago"
-            : new Date(props.selectCurrentNews.time * 1000).getMinutes() +
-              " minutes ago"}
-        </p>
+        <p>{getTimeAgo(props.selectCurrentNews.time)}</p>
         <p>| {props.selectCurrentNews.descendants} comments</p>
-      </NewsPageInfoStyled>
-    </TitleSectionStyled>
+      </NewsPageDescriptionStyled>
+    </NewsPageHeaderStyled>
   );
 };

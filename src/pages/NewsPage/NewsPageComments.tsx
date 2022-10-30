@@ -1,11 +1,18 @@
-import React, { useState } from "react";
-import { CommentSectionStyled } from "./NewsPage.styled";
+import React from "react";
+import { NewsPageCommentsStyled } from "./NewsPage.styled";
 import { SingleComment } from "./SingleComment";
+import { CurrentNewsParentComments } from "../../store/newsSlice";
 
-export const NewsPageComments = (props: any) => {
+interface NewsPageCommentsProps {
+  parentComments: CurrentNewsParentComments[];
+  handleClickOnComment: (commentsID: number[]) => void;
+  selectCurrentParentComments: CurrentNewsParentComments[];
+}
+
+export const NewsPageComments: React.FC<NewsPageCommentsProps> = (props) => {
   return (
-    <CommentSectionStyled>
-      {props.parentComments.map((parentComment: any) =>
+    <NewsPageCommentsStyled>
+      {props.parentComments.map((parentComment: CurrentNewsParentComments) =>
         !parentComment.text ? (
           ""
         ) : (
@@ -17,6 +24,6 @@ export const NewsPageComments = (props: any) => {
           />
         )
       )}
-    </CommentSectionStyled>
+    </NewsPageCommentsStyled>
   );
 };

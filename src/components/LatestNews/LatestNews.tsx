@@ -1,24 +1,30 @@
 import React from "react";
 import {
-  NewsContainerStyled,
-  NewsInfoStyled,
-  NewsTitleStyled,
-} from "./News.styled";
+  LatestNewsContainerStyled,
+  LatestNewsBodyStyled,
+  LatestNewsTitleStyled,
+} from "./LatestNews.styled";
 import { Link } from "react-router-dom";
 import { Spinner } from "../Spinner/Spinner";
 import { getTimeAgo } from "../../utils/getTimeAgo";
+import { PostInfo } from "../../store/newsSlice";
 
-export const LatestNews = (props: any) => {
+export interface LatestNewsProps {
+  areNewsLoaded: boolean;
+  detailedNewsInfo: PostInfo[];
+}
+
+export const LatestNews: React.FC<LatestNewsProps> = (props) => {
   return (
     <>
       {props.areNewsLoaded ? (
-        props.detailedNewsInfo.map((news: any, i: number) => (
-          <NewsContainerStyled key={news.id}>
-            <NewsTitleStyled>
+        props.detailedNewsInfo.map((news: PostInfo, i: number) => (
+          <LatestNewsContainerStyled key={news.id}>
+            <LatestNewsTitleStyled>
               {i + 1 + "."}
               <Link to={`/news/${news.id}`}>{news.title}</Link>
-            </NewsTitleStyled>
-            <NewsInfoStyled>
+            </LatestNewsTitleStyled>
+            <LatestNewsBodyStyled>
               <p>{news.score} points</p>
               <p>by {news.by}</p>
               <p>{getTimeAgo(news.time)}</p>
@@ -26,8 +32,8 @@ export const LatestNews = (props: any) => {
                 |{" "}
                 <Link to={`/news/${news.id}`}>{news.descendants} comments</Link>
               </p>
-            </NewsInfoStyled>
-          </NewsContainerStyled>
+            </LatestNewsBodyStyled>
+          </LatestNewsContainerStyled>
         ))
       ) : (
         <Spinner />

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { SetStateAction, useState } from "react";
 import {
   ChildCommentContainerStyled,
   CommentBodyStyled,
@@ -6,21 +6,21 @@ import {
   ParentCommentContainerStyled,
 } from "./NewsPage.styled";
 import { getTimeAgo } from "../../utils/getTimeAgo";
+import { CurrentNewsParentComments } from "../../store/newsSlice";
 
-export const SingleComment = (props: any) => {
+interface SingleCommentProps {
+  parentComment: CurrentNewsParentComments;
+  handleClickOnComment: (commentsID: number[]) => void;
+  selectCurrentParentComments: CurrentNewsParentComments[];
+}
+
+export const SingleComment: React.FC<SingleCommentProps> = (props) => {
   const [isChildVisible, setIsChildVisible] = useState(false);
   return (
     <ParentCommentContainerStyled>
       <CommentTitleStyled>
         <p>{props.parentComment.by}</p>
-        <p>
-          {new Date(props.parentComment.time * 1000).getMinutes() > 60
-            ? Math.floor(
-                new Date(props.parentComment.time * 1000).getMinutes() / 60
-              ) + " hours ago"
-            : new Date(props.parentComment.time * 1000).getMinutes() +
-              " minutes ago"}
-        </p>
+        <p>{getTimeAgo(props.parentComment.time)}</p>
 
         {props.parentComment.kids && props.parentComment.kids.length > 0 && (
           <p>
@@ -49,12 +49,12 @@ export const SingleComment = (props: any) => {
       {isChildVisible && (
         <ChildCommentContainerStyled>
           {props.selectCurrentParentComments
-            .filter((childComment: any) => {
+            .filter((childComment: CurrentNewsParentComments) => {
               return childComment.parent === props.parentComment.id;
             })
-            .map((childComment: any) => (
+            .map((childComment: CurrentNewsParentComments) => (
               <>
-                <CommentTitleStyled>
+                <CommentTitleStyled key={childComment.id}>
                   <p>▲ {childComment.by}</p>
                   <p>{getTimeAgo(childComment.time)}</p>
                 </CommentTitleStyled>

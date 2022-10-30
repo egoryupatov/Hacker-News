@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const NewsContainerStyled = styled.div`
+export const LatestNewsContainerStyled = styled.div`
   display: flex;
   flex-direction: column;
   padding: 20px;
@@ -9,14 +9,14 @@ export const NewsContainerStyled = styled.div`
   background: #f6f6ef;
 `;
 
-export const NewsTitleStyled = styled.div`
+export const LatestNewsTitleStyled = styled.div`
   display: flex;
   gap: 2px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   padding-bottom: 5px;
 `;
 
-export const NewsInfoStyled = styled.div`
+export const LatestNewsBodyStyled = styled.div`
   display: flex;
   flex-direction: row;
   gap: 5px;

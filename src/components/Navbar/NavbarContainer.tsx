@@ -1,15 +1,14 @@
 import React from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import { useGetNews } from "../../utils/useGetNews";
 import { useDispatch } from "react-redux";
 import { setAreCommentsLoaded, setAreNewsLoaded } from "../../store/newsSlice";
 import { useGetSpecificNewsInfo } from "../../utils/useGetSpecificNewsInfo";
 import { Navbar } from "./Navbar";
 
-const newsID = 33360171;
-
-export const NavbarContainer = () => {
+export const NavbarContainer: React.FC = () => {
   const dispatch = useDispatch();
+  const params = useParams();
   const [getNews] = useGetNews();
   const [getNewsWithComments] = useGetSpecificNewsInfo();
 
@@ -22,7 +21,7 @@ export const NavbarContainer = () => {
 
   const handleRefreshCommentsClick = () => {
     dispatch(setAreCommentsLoaded(false));
-    getNewsWithComments(newsID);
+    getNewsWithComments(Number(params.id));
   };
 
   return (

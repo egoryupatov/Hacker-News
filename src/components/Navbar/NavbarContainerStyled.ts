@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const NavbarStyled = styled.nav`
+export const NavbarContainerStyled = styled.nav`
   display: flex;
   align-items: center;
   background: #ff6600;
@@ -9,7 +9,7 @@ export const NavbarStyled = styled.nav`
   padding: 10px 20px 10px 20px;
 `;
 
-export const NavBarButtonsContainerStyled = styled.div`
+export const NavbarButtonsContainerStyled = styled.div`
   display: flex;
   gap: 10px;
 `;
