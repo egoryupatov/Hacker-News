@@ -1,12 +1,12 @@
-import React, { SetStateAction, useState } from "react";
+import React, { useState } from "react";
 import {
-  ChildCommentContainerStyled,
   CommentBodyStyled,
   CommentTitleStyled,
   ParentCommentContainerStyled,
 } from "./NewsPage.styled";
 import { getTimeAgo } from "../../utils/getTimeAgo";
 import { CurrentNewsParentComments } from "../../store/newsSlice";
+import { NewsPageComments } from "./NewsPageComments";
 
 interface SingleCommentProps {
   parentComment: CurrentNewsParentComments;
@@ -47,29 +47,15 @@ export const SingleComment: React.FC<SingleCommentProps> = (props) => {
       </CommentBodyStyled>
 
       {isChildVisible && (
-        <ChildCommentContainerStyled>
-          {props.selectCurrentParentComments
-            .filter((childComment: CurrentNewsParentComments) => {
+        <NewsPageComments
+          parentComments={props.selectCurrentParentComments.filter(
+            (childComment: CurrentNewsParentComments) => {
               return childComment.parent === props.parentComment.id;
-            })
-            .map((childComment: CurrentNewsParentComments) =>
-              childComment.text === undefined ? (
-                ""
-              ) : (
-                <>
-                  <CommentTitleStyled key={childComment.id}>
-                    <p>▲ {childComment.by}</p>
-                    <p>{getTimeAgo(childComment.time)}</p>
-                  </CommentTitleStyled>
-                  <CommentBodyStyled>
-                    <div
-                      dangerouslySetInnerHTML={{ __html: childComment.text }}
-                    ></div>
-                  </CommentBodyStyled>
-                </>
-              )
-            )}
-        </ChildCommentContainerStyled>
+            }
+          )}
+          handleClickOnComment={props.handleClickOnComment}
+          selectCurrentParentComments={props.selectCurrentParentComments}
+        />
       )}
     </ParentCommentContainerStyled>
   );

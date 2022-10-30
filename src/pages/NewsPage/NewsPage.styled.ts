@@ -10,18 +10,22 @@ export const NewsPageHeaderStyled = styled(LatestNewsContainerStyled)``;
 export const NewsPageCommentsStyled = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 20px;
-  gap: 15px;
-  margin-bottom: 15px;
+`;
+
+export const NewsPageContainerStyled = styled.div`
+  padding-bottom: 20px;
 `;
 
 export const ParentCommentContainerStyled = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 20px;
+  padding: 5px 30px 15px 30px;
   gap: 15px;
-  margin-bottom: 15px;
   background: #f6f6ef;
+
+  &:nth-last-child(1) {
+    padding: 5px 30px 0px 30px;
+  }
 `;
 
 export const NewsPageTitleStyled = styled(LatestNewsTitleStyled)`
@@ -61,6 +65,10 @@ export const CommentBodyStyled = styled.div`
   a {
     text-decoration: underline;
   }
+
+  p {
+    margin-top: 10px;
+  }
 `;
 
 export const ChildCommentContainerStyled = styled.div`
@@ -85,4 +93,8 @@ export const NewsPageDescriptionStyled = styled(LatestNewsBodyStyled)`
 export const ParentNewsTextStyled = styled.div`
   display: flex;
   font-size: 14px;
+
+  p {
+    margin-top: 10px;
+  }
 `;

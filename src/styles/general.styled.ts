@@ -7,6 +7,7 @@ export const WrapperStyled = styled.div`
   margin: 0 auto;
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
   min-height: 100vh;
+  background: #f6f6ef;
 `;
 
 export const PageContainerStyled = styled.div`

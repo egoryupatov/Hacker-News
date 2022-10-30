@@ -3,6 +3,7 @@ import { NewsPageHeader } from "./NewsPageHeader";
 import { NewsPageComments } from "./NewsPageComments";
 import { Spinner } from "../../components/Spinner/Spinner";
 import { CurrentNews, CurrentNewsParentComments } from "../../store/newsSlice";
+import { NewsPageContainerStyled } from "./NewsPage.styled";
 
 interface NewsPageProps {
   areCommentsLoaded: boolean;
@@ -14,7 +15,7 @@ interface NewsPageProps {
 
 export const NewsPage: React.FC<NewsPageProps> = (props) => {
   return (
-    <>
+    <NewsPageContainerStyled>
       {props.areCommentsLoaded && props.selectCurrentNews ? (
         <>
           <NewsPageHeader selectCurrentNews={props.selectCurrentNews} />
@@ -27,6 +28,6 @@ export const NewsPage: React.FC<NewsPageProps> = (props) => {
       ) : (
         <Spinner />
       )}
-    </>
+    </NewsPageContainerStyled>
   );
 };

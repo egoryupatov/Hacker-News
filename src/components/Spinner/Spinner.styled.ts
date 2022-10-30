@@ -14,7 +14,7 @@ export const SpinnerWrapperStyled = styled.div`
 `;
 
 export const SpinnerStyled = styled.div`
-  border: 12px solid #f3f3f3;
+  border: 12px solid #ffffff;
   border-top: 12px solid #ff6600;
   border-radius: 50%;
   margin: 0 auto;
