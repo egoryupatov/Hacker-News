@@ -7,22 +7,22 @@ import { NewsPageContainerStyled } from "./NewsPage.styled";
 
 interface NewsPageProps {
   areCommentsLoaded: boolean;
-  selectCurrentNews: CurrentNews | null;
+  currentNews: CurrentNews | null;
   parentComments: CurrentNewsParentComments[];
   handleClickOnComment: (commentsID: number[]) => void;
-  selectCurrentParentComments: CurrentNewsParentComments[];
+  currentNewsComments: CurrentNewsParentComments[];
 }
 
 export const NewsPage: React.FC<NewsPageProps> = (props) => {
   return (
     <NewsPageContainerStyled>
-      {props.areCommentsLoaded && props.selectCurrentNews ? (
+      {props.areCommentsLoaded && props.currentNews ? (
         <>
-          <NewsPageHeader selectCurrentNews={props.selectCurrentNews} />
+          <NewsPageHeader currentNews={props.currentNews} />
           <NewsPageComments
             parentComments={props.parentComments}
             handleClickOnComment={props.handleClickOnComment}
-            selectCurrentParentComments={props.selectCurrentParentComments}
+            currentNewsComments={props.currentNewsComments}
           />
         </>
       ) : (

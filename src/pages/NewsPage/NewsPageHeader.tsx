@@ -11,19 +11,19 @@ import { getTimeAgo } from "../../utils/getTimeAgo";
 import { ParentNewsTextStyled, NewsPageInfoStyled } from "./NewsPage.styled";
 
 interface NewsPageHeaderProps {
-  selectCurrentNews: CurrentNews;
+  currentNews: CurrentNews;
 }
 
 export const NewsPageHeader: React.FC<NewsPageHeaderProps> = (props) => {
   return (
     <NewsPageHeaderStyled>
       <NewsPageTitleStyled>
-        {props.selectCurrentNews.title}
+        {props.currentNews.title}
 
         <TitleURLStyled>
-          {props.selectCurrentNews.url ? (
-            <a href={props.selectCurrentNews.url}>
-              ({getShortURL(props.selectCurrentNews.url)})
+          {props.currentNews.url ? (
+            <a href={props.currentNews.url}>
+              ({getShortURL(props.currentNews.url)})
             </a>
           ) : (
             ""
@@ -34,17 +34,17 @@ export const NewsPageHeader: React.FC<NewsPageHeaderProps> = (props) => {
       <NewsPageDescriptionStyled>
         <NewsPageInfoStyled>
           <p>
-            {props.selectCurrentNews.score} point
-            {props.selectCurrentNews.score > 1 ? "s" : ""}
+            {props.currentNews.score} point
+            {props.currentNews.score > 1 ? "s" : ""}
           </p>
-          <p>by {props.selectCurrentNews.by}</p>
-          <p>{getTimeAgo(props.selectCurrentNews.time)}</p>
-          <p>| {props.selectCurrentNews.descendants} comments</p>
+          <p>by {props.currentNews.by}</p>
+          <p>{getTimeAgo(props.currentNews.time)}</p>
+          <p>| {props.currentNews.descendants} comments</p>
         </NewsPageInfoStyled>
         <ParentNewsTextStyled>
-          {props.selectCurrentNews.text ? (
+          {props.currentNews.text ? (
             <div
-              dangerouslySetInnerHTML={{ __html: props.selectCurrentNews.text }}
+              dangerouslySetInnerHTML={{ __html: props.currentNews.text }}
             ></div>
           ) : (
             ""

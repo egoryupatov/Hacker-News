@@ -11,7 +11,7 @@ import { NewsPageComments } from "./NewsPageComments";
 interface SingleCommentProps {
   parentComment: CurrentNewsParentComments;
   handleClickOnComment: (commentsID: number[]) => void;
-  selectCurrentParentComments: CurrentNewsParentComments[];
+  currentNewsComments: CurrentNewsParentComments[];
 }
 
 export const SingleComment: React.FC<SingleCommentProps> = (props) => {
@@ -48,13 +48,13 @@ export const SingleComment: React.FC<SingleCommentProps> = (props) => {
 
       {isChildVisible && (
         <NewsPageComments
-          parentComments={props.selectCurrentParentComments.filter(
+          parentComments={props.currentNewsComments.filter(
             (childComment: CurrentNewsParentComments) => {
               return childComment.parent === props.parentComment.id;
             }
           )}
           handleClickOnComment={props.handleClickOnComment}
-          selectCurrentParentComments={props.selectCurrentParentComments}
+          currentNewsComments={props.currentNewsComments}
         />
       )}
     </ParentCommentContainerStyled>

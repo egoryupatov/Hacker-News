@@ -6,7 +6,7 @@ import { CurrentNewsParentComments } from "../../store/newsSlice";
 interface NewsPageCommentsProps {
   parentComments: CurrentNewsParentComments[];
   handleClickOnComment: (commentsID: number[]) => void;
-  selectCurrentParentComments: CurrentNewsParentComments[];
+  currentNewsComments: CurrentNewsParentComments[];
 }
 
 export const NewsPageComments: React.FC<NewsPageCommentsProps> = (props) => {
@@ -20,7 +20,7 @@ export const NewsPageComments: React.FC<NewsPageCommentsProps> = (props) => {
             key={parentComment.id}
             parentComment={parentComment}
             handleClickOnComment={props.handleClickOnComment}
-            selectCurrentParentComments={props.selectCurrentParentComments}
+            currentNewsComments={props.currentNewsComments}
           />
         )
       )}

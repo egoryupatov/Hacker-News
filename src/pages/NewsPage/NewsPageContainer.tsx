@@ -24,7 +24,7 @@ export const NewsPageContainer: React.FC = () => {
   const currentNews = useAppSelector(selectCurrentNewsInfo);
   const currentNewsComments = useAppSelector(selectCurrentNewsCommentsArray);
 
-  const currentNewsCommentParents = currentNewsComments.filter((comment) => {
+  const parentComments = currentNewsComments.filter((comment) => {
     return comment.parent === Number(params.id);
   });
 
@@ -37,10 +37,10 @@ export const NewsPageContainer: React.FC = () => {
   return (
     <NewsPage
       areCommentsLoaded={areCommentsLoaded}
-      selectCurrentNews={currentNews}
-      parentComments={currentNewsCommentParents}
+      currentNews={currentNews}
+      parentComments={parentComments}
       handleClickOnComment={handleClickOnComment}
-      selectCurrentParentComments={currentNewsComments}
+      currentNewsComments={currentNewsComments}
     />
   );
 };

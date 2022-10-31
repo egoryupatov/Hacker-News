@@ -14,8 +14,6 @@ export const NavbarContainer: React.FC = () => {
 
   const location = useLocation();
 
-  console.log(params);
-
   const handleRefreshNewsClick = () => {
     getNews();
     dispatch(setAreNewsLoaded(false));
