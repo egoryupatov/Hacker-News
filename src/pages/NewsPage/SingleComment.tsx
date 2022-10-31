@@ -5,13 +5,13 @@ import {
   ParentCommentContainerStyled,
 } from "./NewsPage.styled";
 import { getTimeAgo } from "../../utils/getTimeAgo";
-import { CurrentNewsParentComments } from "../../store/newsSlice";
+import { Comments } from "../../store/newsSlice";
 import { NewsPageComments } from "./NewsPageComments";
 
-interface SingleCommentProps {
-  parentComment: CurrentNewsParentComments;
+export interface SingleCommentProps {
+  parentComment: Comments;
   handleClickOnComment: (commentsID: number[]) => void;
-  currentNewsComments: CurrentNewsParentComments[];
+  currentNewsComments: Comments[];
 }
 
 export const SingleComment: React.FC<SingleCommentProps> = (props) => {
@@ -49,7 +49,7 @@ export const SingleComment: React.FC<SingleCommentProps> = (props) => {
       {isChildVisible && (
         <NewsPageComments
           parentComments={props.currentNewsComments.filter(
-            (childComment: CurrentNewsParentComments) => {
+            (childComment: Comments) => {
               return childComment.parent === props.parentComment.id;
             }
           )}

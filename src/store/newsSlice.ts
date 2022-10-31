@@ -2,7 +2,19 @@ import { createSlice } from "@reduxjs/toolkit";
 import type { RootState } from "./store";
 import { keyBy } from "lodash";
 
-export interface CurrentNewsParentComments {
+export interface News {
+  url: string;
+  title: string;
+  score: number;
+  time: number;
+  by: string;
+  descendants: number;
+  kids: number[];
+  text: string;
+  id: number;
+}
+
+export interface Comments {
   by: string;
   kids: number[];
   parent: number;
@@ -12,36 +24,10 @@ export interface CurrentNewsParentComments {
   id: number;
 }
 
-interface Kids {
-  by: string;
-  time: number;
-}
-
-export interface CurrentNews {
-  url: string;
-  title: string;
-  score: number;
-  time: number;
-  by: string;
-  descendants: number;
-  kids: Kids[];
-  text: string;
-}
-
-export interface PostInfo {
-  title: string;
-  score: number;
-  by: string;
-  time: number;
-  id: number;
-  descendants: number;
-  url: string;
-}
-
 interface NewsState {
-  newsDetails: PostInfo[];
-  currentNews: CurrentNews;
-  comments: Record<number, CurrentNewsParentComments>;
+  newsDetails: News[];
+  currentNews: News;
+  comments: Record<number, Comments>;
   areNewsLoaded: boolean;
   areCommentsLoaded: boolean;
 }
@@ -57,6 +43,7 @@ const initialState: NewsState = {
     kids: [],
     score: 0,
     text: "",
+    id: 0,
   },
   comments: {},
   areNewsLoaded: false,
@@ -67,11 +54,11 @@ export const newsSlice = createSlice({
   name: "news",
   initialState,
   reducers: {
-    getDetailedNewsInfo: (state, action) => {
-      state.newsDetails = action.payload;
-    },
     getCurrentNewsInfo: (state, action) => {
       state.currentNews = action.payload;
+    },
+    getDetailedNewsInfo: (state, action) => {
+      state.newsDetails = action.payload;
     },
     getCurrentNewsParentComments: (state, action) => {
       state.comments = { ...state.comments, ...keyBy(action.payload, "id") };

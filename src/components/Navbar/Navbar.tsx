@@ -6,7 +6,7 @@ import {
 import { Link, Location } from "react-router-dom";
 import { ButtonStyled } from "../../styles/general.styled";
 
-interface NavbarProps {
+export interface NavbarProps {
   handleRefreshCommentsClick: () => void;
   handleRefreshNewsClick: () => void;
   location: Location;
@@ -18,7 +18,7 @@ export const Navbar: React.FC<NavbarProps> = (props) => {
       <div>Hacker News</div>
       <NavbarButtonsContainerStyled>
         <Link to={"/"}>
-          <ButtonStyled>Go Home</ButtonStyled>
+          <ButtonStyled>Go home</ButtonStyled>
         </Link>
 
         {props.location.pathname.includes("news") ? (

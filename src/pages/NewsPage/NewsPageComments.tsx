@@ -1,18 +1,18 @@
 import React from "react";
 import { NewsPageCommentsStyled } from "./NewsPage.styled";
 import { SingleComment } from "./SingleComment";
-import { CurrentNewsParentComments } from "../../store/newsSlice";
+import { Comments } from "../../store/newsSlice";
 
-interface NewsPageCommentsProps {
-  parentComments: CurrentNewsParentComments[];
+export interface NewsPageCommentsProps {
+  parentComments: Comments[];
   handleClickOnComment: (commentsID: number[]) => void;
-  currentNewsComments: CurrentNewsParentComments[];
+  currentNewsComments: Comments[];
 }
 
 export const NewsPageComments: React.FC<NewsPageCommentsProps> = (props) => {
   return (
     <NewsPageCommentsStyled>
-      {props.parentComments.map((parentComment: CurrentNewsParentComments) =>
+      {props.parentComments.map((parentComment: Comments) =>
         !parentComment.text ? (
           ""
         ) : (

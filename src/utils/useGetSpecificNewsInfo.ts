@@ -1,7 +1,7 @@
 import { useDispatch } from "react-redux";
 import { useCallback } from "react";
 import {
-  CurrentNewsParentComments,
+  Comments,
   getCurrentNewsInfo,
   getCurrentNewsParentComments,
   setAreCommentsLoaded,
@@ -17,7 +17,7 @@ export const useGetSpecificNewsInfo = () => {
         dispatch(getCurrentNewsInfo(response));
         if (response.kids) {
           Promise.all(
-            response.kids.map((comment: CurrentNewsParentComments) => {
+            response.kids.map((comment: Comments) => {
               return fetch(
                 `https://hacker-news.firebaseio.com/v0/item/${comment}.json?print=pretty`
               ).then((response) => response.json());

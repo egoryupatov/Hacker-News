@@ -7,20 +7,20 @@ import {
 import { Link } from "react-router-dom";
 import { Spinner } from "../Spinner/Spinner";
 import { getTimeAgo } from "../../utils/getTimeAgo";
-import { PostInfo } from "../../store/newsSlice";
+import { News } from "../../store/newsSlice";
 import { getShortURL } from "../../utils/getShortURL";
 import { TitleURLStyled } from "../../pages/NewsPage/NewsPage.styled";
 
 export interface LatestNewsProps {
   areNewsLoaded: boolean;
-  detailedNewsInfo: PostInfo[];
+  detailedNewsInfo: News[];
 }
 
 export const LatestNews: React.FC<LatestNewsProps> = (props) => {
   return (
     <>
       {props.areNewsLoaded ? (
-        props.detailedNewsInfo.map((news: PostInfo, i: number) => (
+        props.detailedNewsInfo.map((news: News, i: number) => (
           <LatestNewsContainerStyled key={news.id}>
             <LatestNewsTitleStyled>
               {i + 1 + "."}

@@ -2,15 +2,15 @@ import React from "react";
 import { NewsPageHeader } from "./NewsPageHeader";
 import { NewsPageComments } from "./NewsPageComments";
 import { Spinner } from "../../components/Spinner/Spinner";
-import { CurrentNews, CurrentNewsParentComments } from "../../store/newsSlice";
+import { Comments, News } from "../../store/newsSlice";
 import { NewsPageContainerStyled } from "./NewsPage.styled";
 
-interface NewsPageProps {
+export interface NewsPageProps {
   areCommentsLoaded: boolean;
-  currentNews: CurrentNews | null;
-  parentComments: CurrentNewsParentComments[];
+  currentNews: News | null;
+  parentComments: Comments[];
   handleClickOnComment: (commentsID: number[]) => void;
-  currentNewsComments: CurrentNewsParentComments[];
+  currentNewsComments: Comments[];
 }
 
 export const NewsPage: React.FC<NewsPageProps> = (props) => {

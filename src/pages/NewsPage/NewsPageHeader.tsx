@@ -6,12 +6,12 @@ import {
   NewsPageHeaderStyled,
 } from "./NewsPage.styled";
 import { getShortURL } from "../../utils/getShortURL";
-import { CurrentNews } from "../../store/newsSlice";
+import { News } from "../../store/newsSlice";
 import { getTimeAgo } from "../../utils/getTimeAgo";
 import { ParentNewsTextStyled, NewsPageInfoStyled } from "./NewsPage.styled";
 
-interface NewsPageHeaderProps {
-  currentNews: CurrentNews;
+export interface NewsPageHeaderProps {
+  currentNews: News;
 }
 
 export const NewsPageHeader: React.FC<NewsPageHeaderProps> = (props) => {

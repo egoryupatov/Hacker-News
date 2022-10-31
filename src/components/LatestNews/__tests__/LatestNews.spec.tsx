@@ -3,6 +3,7 @@ import { LatestNews, LatestNewsProps } from "../LatestNews";
 import { render } from "@testing-library/react";
 import { screen } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
+import { fireEvent } from "@testing-library/react";
 
 describe("LatestNews", () => {
   let latestNewsProps: LatestNewsProps;
@@ -12,24 +13,73 @@ describe("LatestNews", () => {
       areNewsLoaded: true,
       detailedNewsInfo: [
         {
-          title: "This is a test news",
+          title: "Hello, there are some awesome news!",
           score: 123,
           by: "Egor",
-          time: 2131,
+          time: 1667223496,
           id: 1,
-          descendants: 123,
-          url: "https://amazingwebsite.com",
+          descendants: 2,
+          url: "https://www.sandboxx.us/blog/why-did-the-f-14-tomcat-retire-decades-before-its-peers/",
+          kids: [1213, 1232],
+          text: "The weather is going to be good today!",
         },
       ],
     };
   });
 
-  it("should be rendered", () => {
+  it("should display the news author", () => {
     render(
       <MemoryRouter>
         <LatestNews {...latestNewsProps} />
       </MemoryRouter>
     );
     expect(screen.getByText("by Egor")).toBeVisible();
+  });
+
+  it("should display the news title", () => {
+    render(
+      <MemoryRouter>
+        <LatestNews {...latestNewsProps} />
+      </MemoryRouter>
+    );
+    expect(
+      screen.getByText("Hello, there are some awesome news!")
+    ).toBeVisible();
+  });
+
+  it("should display the news rating", () => {
+    render(
+      <MemoryRouter>
+        <LatestNews {...latestNewsProps} />
+      </MemoryRouter>
+    );
+    expect(screen.getByText("123 points")).toBeVisible();
+  });
+
+  it("should display the short news URL", () => {
+    render(
+      <MemoryRouter>
+        <LatestNews {...latestNewsProps} />
+      </MemoryRouter>
+    );
+    expect(screen.getByText("(sandboxx.us)")).toBeVisible();
+  });
+
+  it("should display the number of comments", () => {
+    render(
+      <MemoryRouter>
+        <LatestNews {...latestNewsProps} />
+      </MemoryRouter>
+    );
+    expect(screen.getByText("2 comments")).toBeVisible();
+  });
+
+  it("should allow you to click the news", () => {
+    render(
+      <MemoryRouter>
+        <LatestNews {...latestNewsProps} />
+      </MemoryRouter>
+    );
+    fireEvent.click(screen.getByText("Hello, there are some awesome news!"));
   });
 });

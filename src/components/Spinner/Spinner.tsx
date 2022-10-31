@@ -10,7 +10,7 @@ export const Spinner: React.FC = () => {
   const location = useLocation();
 
   return (
-    <SpinnerWrapperStyled>
+    <SpinnerWrapperStyled test-id={"spinner"}>
       <SpinnerContainerStyled>
         <SpinnerStyled />
         {location.pathname.includes("news") ? (
