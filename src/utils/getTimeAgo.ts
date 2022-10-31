@@ -18,4 +18,8 @@ export const getTimeAgo = (time: number) => {
   if (seconds > 60) {
     return Math.floor(seconds / 60) + " minutes ago";
   }
+
+  if (seconds < 60) {
+    return seconds + " seconds ago";
+  }
 };
